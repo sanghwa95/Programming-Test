@@ -26,8 +26,7 @@ def findTestFolder(name, path):
     for dirpath, dirname, filename in os.walk(path):
         if name in dirname:
             return os.path.join(dirpath, name)
-test_folder = findTestFolder("test", "E:\eclipse-workspace\Calculator")
-
+test_folder = findTestFolder("test", project_path)
 test_class_lst = glob.glob(test_folder+'\\*.class')
 number_of_classes = len(test_class_lst)
 list_of_classes = ', '.join(test_class_lst)
@@ -35,13 +34,15 @@ list_of_classes = ', '.join(test_class_lst)
 # 테스트 케이스 개수 구하기
 number_of_testcases = 0
 list_of_methods = []
-f = open('E:\\eclipse-workspace\\Calculator\\Calculator\\test\\CalculatorTest.java', "r")
-for line in f.readlines():
-    if '@Test' in line:
-        number_of_testcases += 1
-    if 'public void test' in line:
-        list_of_methods.append(line[13:-3])
-f.close()
+test_java_lst = glob.glob(test_folder+'\\*.java')
+for test_class in test_java_lst:
+    f = open(test_class, "r")
+    for line in f.readlines():
+        if '@Test' in line:
+            number_of_testcases += 1
+        if 'public void test' in line:
+            list_of_methods.append(line[13:-3])
+    f.close()
 list_of_methods = ', '.join(list_of_methods)
 number_of_commits = number_of_commits + 1
 file_data = OrderedDict() # json 파일 만들기
@@ -55,3 +56,7 @@ f.write(str(number_of_commits))
 f.close()
 
 print(json.dumps(file_data, ensure_ascii=False, indent="\t"))
+
+# output.json 파일 만들기
+with open('output.json', 'w') as outfile:
+    json.dump(file_data, outfile, indent="\t")
