@@ -19,10 +19,7 @@ main.py를 실행할 때마다 커밋 횟수가 증가하게 됩니다.
 
 ### 3. 데모 예시
 
-cmd에 아래와 같이 명령어를 입력하면 됩니다.
-
-- python C:\Users\USER\PycharmProjects\ProgrammingTest\main.py
-- E:\eclipse-workspace\Calculator
+main.py를 4번 실행하면 number_of_commits가 4가 되고  tests_of_commits에 4개의 value가 쌓이는 것을 알 수 있다.
 
 
 ![image](https://github.com/sanghwa95/Programming-Test/assets/44187001/78387619-2f67-4fd3-a841-e07ae202a664)
