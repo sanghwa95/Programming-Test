@@ -22,11 +22,11 @@ f.close()
 hashcode = md5(str(number_of_commits).encode('utf8')).hexdigest() # commit에 대한 해쉬값 생성
 
 # 테스트 클래스 개수 구하기
-def findfile(name, path):
+def findTestFolder(name, path):
     for dirpath, dirname, filename in os.walk(path):
         if name in dirname:
             return os.path.join(dirpath, name)
-test_folder = findfile("test", "E:\eclipse-workspace\Calculator")
+test_folder = findTestFolder("test", "E:\eclipse-workspace\Calculator")
 
 test_class_lst = glob.glob(test_folder+'\\*.class')
 number_of_classes = len(test_class_lst)
