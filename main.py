@@ -3,9 +3,9 @@ from collections import OrderedDict
 from hashlib import md5
 import glob
 import os
+import sys
 
-project_path = input() # 프로젝트 경로 입력 받기
-
+project_path = sys.argv[1]
 # 지금까지의 커밋 횟수 가져오기
 if not os.path.isfile('number_of_commits.txt'):
     f = open('number_of_commits.txt', 'w')
@@ -45,18 +45,29 @@ for test_class in test_java_lst:
     f.close()
 list_of_methods = ', '.join(list_of_methods)
 number_of_commits = number_of_commits + 1
-file_data = OrderedDict() # json 파일 만들기
 
-file_data["location"] = project_path
-file_data["number_of_commits"] = str(number_of_commits)
-file_data["tests_of_commits"] = { 'commits':hashcode, 'num_of_test_classes':number_of_classes, 'number_of_testcases':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods }
+# json 파일 만들기
+if not os.path.isfile('output.json'):
+    file_data = OrderedDict()
+    file_data["location"] = project_path
+    file_data["number_of_commits"] = str(number_of_commits)
+    file_data["tests_of_commits"] = [{'commits':hashcode, 'num_of_test_classes':number_of_classes, 'number_of_testcases':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods}]
+    # output.json 파일 만들기
+    with open('output.json', 'w') as outfile:
+        json.dump(file_data, outfile, indent="\t")
+else:
+    with open('output.json', 'r') as file:
+        data = json.load(file)
+    data["number_of_commits"] = str(number_of_commits)
+    tmp=[]
+    for i in data["tests_of_commits"]:
+        tmp.append(i)
+    tmp.append({'commits':hashcode, 'num_of_test_classes':number_of_classes, 'number_of_testcases':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods})
+    data["tests_of_commits"]=tmp
+    with open('output.json', 'w', encoding='utf-8') as file:
+        json.dump(data, file, indent="\t")
 
 f = open('number_of_commits.txt', 'w')
 f.write(str(number_of_commits))
 f.close()
 
-print(json.dumps(file_data, ensure_ascii=False, indent="\t"))
-
-# output.json 파일 만들기
-with open('output.json', 'w') as outfile:
-    json.dump(file_data, outfile, indent="\t")
