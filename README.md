@@ -14,6 +14,8 @@ main.py를 실행한 이후 Calculator 프로젝트 폴더 경로를 input으로
 
 main.py를 실행할 때마다 커밋 횟수가 증가하게 됩니다.
 
+커밋 횟수는 number_of_commits.txt 파일을 자동으로 생성하여 관리합니다.
+
 
 ### 3. 데모 예시
 
