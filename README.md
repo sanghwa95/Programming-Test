@@ -25,6 +25,7 @@ cmd에 아래와 같이 명령어를 입력하면 됩니다.
 - E:\eclipse-workspace\Calculator
 
 
-![image](https://github.com/sanghwa95/Programming-Test/assets/44187001/291fd4ee-342d-4df8-8fa1-da38a6c060b2)
+![image](https://github.com/sanghwa95/Programming-Test/assets/44187001/78387619-2f67-4fd3-a841-e07ae202a664)
+
 
 
