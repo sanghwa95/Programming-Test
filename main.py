@@ -51,7 +51,7 @@ if not os.path.isfile('output.json'):
     file_data = OrderedDict()
     file_data["location"] = project_path
     file_data["number_of_commits"] = str(number_of_commits)
-    file_data["tests_of_commits"] = [{'commits':hashcode, 'num_of_test_classes':number_of_classes, 'number_of_testcases':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods}]
+    file_data["tests_of_commits"] = [{'commits':hashcode, 'num_of_test_classes':number_of_classes, 'num_of_test_methods':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods}]
     # output.json 파일 만들기
     with open('output.json', 'w') as outfile:
         json.dump(file_data, outfile, indent="\t")
@@ -62,7 +62,7 @@ else:
     tmp=[]
     for i in data["tests_of_commits"]:
         tmp.append(i)
-    tmp.append({'commits':hashcode, 'num_of_test_classes':number_of_classes, 'number_of_testcases':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods})
+    tmp.append({'commits':hashcode, 'num_of_test_classes':number_of_classes, 'num_of_test_methods':number_of_testcases, 'list_of_classes':list_of_classes, 'list_of_methods':list_of_methods})
     data["tests_of_commits"]=tmp
     with open('output.json', 'w', encoding='utf-8') as file:
         json.dump(data, file, indent="\t")
